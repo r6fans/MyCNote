@@ -6,7 +6,7 @@ void change(char ch[][3]){
 
 int main(){
     char cs[2][3] = {
-        {'a','b','c'};
+        {'a','b','c'},
         {'d','e','f'}
     };
     printf("cs[0][0] = %c\n", cs[][]);
