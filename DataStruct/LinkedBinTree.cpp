@@ -139,7 +139,11 @@ void InOrderTraversal(BinTree BT){
         while(T){
             Push(S,T); //压栈
             T = T->Left; //遍历左子树
-
+        }
+        if(!IsEmpty(S)){ // 当栈不空时
+            Y = Pop(S); // 出栈
+            printf("%d", T->Data); //访问节点
+            T = T -> Right; //访问右节点
         }
     }
 }
@@ -153,3 +157,80 @@ void InOrderTraversal(BinTree BT){
 //     }
 // }
 
+// 后序遍历非递归
+void PostOrderTraversal(BinTree BT){
+    BinTree T = BT;
+    Stack S = CreateStack(); // 创建并初始化堆栈 S
+
+    vector<BinTree> v;
+    Push(S,T);
+    while(!IsEmpty(S)){ //树不空或者堆栈不空时
+        T = Pop(S);
+        v.push_back(T);
+        if(T->Left){
+            Push(S,T->Left);
+        }
+        if(T->Right){
+            Push(S,T->Right);
+        }
+    }
+
+    reverse(v.begin(), v.end()); // 逆转
+    for(int i=0;i<v.size();i++){
+        printf("%d",v[i]->Data);
+    }
+}
+
+//层次遍历
+void LevelOrderTraversal(BinTree BT){
+    queue<BinTree> q;
+    BinTree T;
+
+    if(!BT){
+        return;
+    }
+
+    q.push(BT); // 将根压入队列
+    while(!q.empty()){
+        T = q.front(); // 访问队首元素
+        q.pop(); //出队
+        printf("%d", T->Data);
+        if(T->Left){
+            q.push(T->Left);
+        }
+        if(T->Right){
+            q.push(T->Right);
+        }
+    }
+
+}
+
+//输出叶子节点
+void FindLeaves(BinTree BT){
+    if(BT){
+        if(!BT->Left && !BT->Right){
+            printf("%d",BT-Data);
+        }
+        FindLeaves(BT->Left);
+        FindLeaves(BT->Right);
+    }
+}
+
+
+//求树的高度
+int GetHeight(BinTree BT){
+    int hl,hr,maxh;
+    if(BT){
+        hl = GetHeight(BT->Left); //求左子树高度
+        hr = GetHeight(BT->Right); //求右子树高度
+        maxh = (hl>hr)?hl:hr;
+        return maxh+1; //当前节点高度为左右子树最大高度+1
+    }else{
+        return 0
+    }
+}
+
+
+int main(){
+    return 0;
+}
