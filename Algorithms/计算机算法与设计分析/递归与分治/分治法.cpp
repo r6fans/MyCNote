@@ -15,5 +15,16 @@ int BinarySearch(Type a[], const Type& x,int n){ //在数组a(已排好序)中�
             right = middle - 1;
         }
     }
-    return -1
+    return -1;
+}
+
+/*2.7 归并排序
+算法思想： 将待排序元素分成两个大小一致的两个子集，分别对两个子集进行归并排序，最后对排好序的子集合并*/
+template<class Type>
+void MergeSort(Type a[], int left, int right){
+    if(left < right){
+        int i = (left+right)/2;
+        MergeSort(a, left,i);
+        MergeSort(a,right,i);
+    }
 }
