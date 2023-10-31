@@ -80,6 +80,35 @@ void QuickSort(ElementType A[], int low,  int high){
         int pivotpos=Partition(A,low,high);  //划分
         QuickSort(A,low,pivotpos-1);    //依次对两个子表进行递归排序
         QuickSort(A,pivotpos+1,high);
+    }
+}
 
+//简单选择排序
+void SelectSort(ElementType A[], int n){
+    for(int i=0;i<n-1;i++){             //一共进行n-1趟
+        int min=i;                      //记录最小元素位置
+        for(int j=i+1; j<n; j++){       //更新最小元素位置
+            if(A[j]<A[min]){
+                min=j;                 
+            }
+        }
+        if(min!=i){
+            swap(A[i],A[min]);
+        }
+    }
+}
+
+//堆排序
+//建立大顶堆
+void BuildMaxHeap(ElementType A[], int len){
+    for(int i=len/2;i>0;i--){           //从i=[n/2]~1,反复调整堆
+        HeadAdjust(A,i,len);
+    }
+}
+
+void HeadAdjust(ElementType A[],int k,int len){
+    A[0]=A[K];                          //A[0]暂存子树的根节点
+    for(int i=2*k;i<=len;i*=2){         //
+        if(i<len&&A[i]<A[i+1])
     }
 }
