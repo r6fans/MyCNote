@@ -73,9 +73,14 @@ void Delete(int index, DoubleList *p){      //index 为要删除节点的下标,
         }
     }
     DoubleList *del = temp->next;
-    temp->next=del->next->next;
-    temp->next->prior=del->prior;
+    temp->next=del->next;
+    del->next->prior=temp;
     free(del);
 }
+
+/*6.对于输入的非负十进制整数，打印输出与其等值的八进制数，要求：
+a. 用C语言给出栈的存储结构
+b. 基于上述存储结构，给出元素入栈和出栈的C语言实现
+c. 基于前两问，用C语言实现本题*/
 
 
