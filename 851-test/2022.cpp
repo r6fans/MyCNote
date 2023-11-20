@@ -83,4 +83,50 @@ a. 用C语言给出栈的存储结构
 b. 基于上述存储结构，给出元素入栈和出栈的C语言实现
 c. 基于前两问，用C语言实现本题*/
 
+//栈的数据结构
+#define MAX_SIZE 100
+typedef struct Stack{
+    int data[MAX_SIZE];
+    int top;
+}Stack;
 
+//栈的出栈入栈实现
+void InitStack(Stack *s){
+    s->top = -1;
+}
+
+bool IsEmpty(Stack *s){
+    return (s->top == -1);
+}
+
+bool IsFull(Stack *s){
+    return (s->top == MAX_SIZE - 1);
+}
+
+void push(Stack *s, int x){
+    if(IsFull(s)){
+        printf("Stack Full!\n");
+        exit(1);
+    }
+    s->data[++(s->top)] = x;
+}
+
+int pop(Stack *s){
+    if(IsEmpty(s)){
+        printf("Stack empty!/n");
+        exit(1);
+    }
+    return s->data[(s->top)--];
+}
+
+// 进制转换实现
+void Conversion(int num, int b){
+    Stack s;
+    InitStack(&s);
+    while(num != 0){
+        push(&s,num/b);
+    }
+    while(!isEmpty(&s)){
+        printf("%d", Pop(&s));
+    }
+}
