@@ -123,3 +123,58 @@ int *BubbleSort(int nums[, int len]){
         }
     }
 }
+
+//快速排序
+//快排分区函数
+int partition(int nums[], int low, int high){
+    //记录基准点，此时出现中转节点
+    int pivot = nums[low];
+    while(low<high){
+        //从高找直到找到一个比基准点小的，记录到低中转节点中
+        while(nums[high] >= pivot) --high;
+        nums[low] = nums[high];
+        while(nums[low] <= pivot) ++low;
+        nums[high] = nums[low];
+    }
+    //low=分区结束位置=高与低中转节点
+    nums[low] - pivot;
+    return low;
+}
+
+//快排主函数，分区递归
+int* QuickSort(int nums[], int low, int high){
+    if(low >= high) return NULL;
+    int pivot = partition(nums,low,high);
+    QuickSort(nums, low, pivot-1);
+    QuickSort(nums, pivot+1, high);
+    return nums;
+}
+
+//折半查找
+int BinarySearch_Recursion(int start, int end, const int nums[], int target){
+    if(start > end) return -1;
+    if(start == end){
+        return nums[start] == target ? start: -1;
+    }
+    int middle = (start+end)/2;
+    if(nums[middle]==target) return middle;
+    if(nums[middle] > target)
+        return BinarySearch_Recursion(start, middle-1,nums,target);
+    else
+        return BinarySearch_Recursion(middle+1, end, nums, target);
+}
+
+//非递归
+int BinarySearch(const int nums[], int len, int target){
+    int start = 0, end = len - 1;
+    while(start<=end){
+        if(start == end)
+            return nums[start] == target ? start : -1;
+        int middle = (start+end) / 2;
+        if(nums[middle] == target) return middle;
+        if(nums[middle] > target) end = middle -1;
+        else
+            start = middle + 1;
+    }
+    return -1;
+}
